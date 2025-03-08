@@ -5,24 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".page1">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="Start Page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Page 1"
+        android:textSize="60"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="239dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="116dp"
-        android:layout_height="68dp"
-        android:text="Page 1"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="412dp" />
-
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to start"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="18dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
