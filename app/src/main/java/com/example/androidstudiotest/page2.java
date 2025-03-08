@@ -11,33 +11,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
-    private Button movetoPageOne;
-    private Button movetoPageTwo;
+public class page2 extends AppCompatActivity {
+    private Button returnToStart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_page2);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        movetoPageOne=findViewById(R.id.moveToPage1);
-        movetoPageOne.setOnClickListener(new View.OnClickListener() {
+        returnToStart = findViewById(R.id.moveToStart);
+        returnToStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this,page1.class);
-              startActivity(intent);
-            }
-        });
-        movetoPageTwo=findViewById(R.id.movetoPage2);
-        movetoPageTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this,page2.class);
-              startActivity(intent);
+                Intent intent = new Intent(page2.this,MainActivity.class);
+                startActivity(intent);
             }
         });
     }
