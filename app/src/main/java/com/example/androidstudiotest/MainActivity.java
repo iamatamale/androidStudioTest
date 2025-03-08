@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
     private Button movetoPageOne;
     private Button movetoPageTwo;
+    private Button movetoPageThree;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               Intent intent = new Intent(MainActivity.this,page2.class);
+              startActivity(intent);
+            }
+        });
+        movetoPageThree=findViewById(R.id.movetoPage3);
+        movetoPageThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent intent = new Intent(MainActivity.this,page3.class);
               startActivity(intent);
             }
         });
