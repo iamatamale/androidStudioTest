@@ -11,16 +11,20 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="279dp"
         android:text="Page 1"
-        android:textSize="60"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="239dp" />
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/moveToStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="18dp"
         android:text="Back to start"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="18dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
