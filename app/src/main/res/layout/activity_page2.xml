@@ -14,6 +14,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="18dp"
         android:text="Back to start"
+        android:backgroundTint="@color/darkgray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

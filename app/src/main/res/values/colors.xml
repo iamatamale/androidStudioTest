@@ -5,4 +5,7 @@
     <color name="blue">#0000FF</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
+    <color name="blackjackgreen">#00643a</color>
+    <color name="casinoyellow">#cb8c2c</color>
+    <color name="darkgray">#323232</color>
 </resources>
