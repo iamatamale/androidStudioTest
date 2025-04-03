@@ -1,6 +1,7 @@
 package com.example.androidstudiotest;
 
 import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,29 +26,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        movetoPageOne=findViewById(R.id.moveToPage1);
-        movetoPageOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this,page1.class);
-              startActivity(intent);
-            }
-        });
-        movetoPageTwo=findViewById(R.id.movetoPage2);
-        movetoPageTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this,page2.class);
-              startActivity(intent);
-            }
-        });
-        movetoPageThree=findViewById(R.id.movetoPage3);
-        movetoPageThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this,page3.class);
-              startActivity(intent);
-            }
-        });
+
+        PageMovement.pageMoving(this, R.id.moveToPage1, page1.class);
+        PageMovement.pageMoving(this, R.id.movetoPage2, page2.class);
+        PageMovement.pageMoving(this, R.id.movetoPage3, page3.class);
     }
+
 }

@@ -23,13 +23,7 @@ public class page3 extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        returnToStart = findViewById(R.id.moveToStart);
-        returnToStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(page3.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
+        PageMovement.pageMoving(this, R.id.moveToStart, MainActivity.class);
     }
 }
