@@ -23,7 +23,9 @@
         android:id="@+id/frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/slotmachine_background">
+        android:background="@drawable/slotmachine_background"
+        android:layout_below="@id/moveToStart"
+        android:layout_marginTop="100dp">
 
         <LinearLayout
             android:id="@+id/imgs"
@@ -57,5 +59,26 @@
         </LinearLayout>
     </FrameLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/winStatus"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textSize="25sp"
+        android:layout_marginTop="100dp">
+    </TextView>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/spinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frame"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/squarebutton"
+        android:text="Spin"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        />
 </RelativeLayout>
