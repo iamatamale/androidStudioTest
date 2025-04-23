@@ -17,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 
 public class page2 extends AppCompatActivity {
-    private Button returnToStart;
     private TextView winStatus;
     private ImageView img1, img2, img3;
     private Wheel wheel1, wheel2, wheel3;
@@ -42,52 +41,63 @@ public class page2 extends AppCompatActivity {
 
         PageMovement.pageMoving(this, R.id.moveToStart, MainActivity.class);
 
-        img1 = (ImageView) findViewById(R.id.img1);
-        img2 = (ImageView) findViewById(R.id.img2);
-        img3 = (ImageView) findViewById(R.id.img3);
-        spinner = (Button) findViewById(R.id.spinButton);
-        winStatus = (TextView) findViewById(R.id.winStatus);
+        img1 = findViewById(R.id.img1);
+        img2 = findViewById(R.id.img2);
+        img3 = findViewById(R.id.img3);
+        spinner = findViewById(R.id.spinButton);
+        winStatus = findViewById(R.id.winStatus);
 
-        spinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isStarted) {
-                    // Start the wheels
-                    wheel1 = new Wheel(img -> runOnUiThread(() -> img1.setImageResource(img)), 200, randomLong(0, 200));
-                    wheel1.start();
+        spinner.setOnClickListener(v -> {
+            if (!isStarted) {
+                // Start the wheels
+                wheel1 = new Wheel(img -> runOnUiThread(() -> img1.setImageResource(img)), 200, randomLong(0, 200));
+                wheel1.start();
 
-                    wheel2 = new Wheel(img -> runOnUiThread(() -> img2.setImageResource(img)), 200, randomLong(150, 400));
-                    wheel2.start();
+                wheel2 = new Wheel(img -> runOnUiThread(() -> img2.setImageResource(img)), 200, randomLong(0, 200));
+                wheel2.start();
 
-                    wheel3 = new Wheel(img -> runOnUiThread(() -> img3.setImageResource(img)), 200, randomLong(150, 400));
-                    wheel3.start();
+                wheel3 = new Wheel(img -> runOnUiThread(() -> img3.setImageResource(img)), 200, randomLong(0, 200));
+                wheel3.start();
 
-                    spinner.setText("Spinning");
-                    winStatus.setText("");
-                    isStarted = true;
+                spinner.setText("Spinning");
+                winStatus.setText("");
+                isStarted = true;
 
-                    new Handler().postDelayed(() -> {
-                        wheel1.stopWheel();
-                        wheel2.stopWheel();
-                        wheel3.stopWheel();
+                new Handler().postDelayed(() -> {
+                    // Stop the wheels (this just sets the flag)
+                    wheel1.stopWheel();
+                    new Handler().postDelayed(() -> wheel2.stopWheel(), 500);
+                    new Handler().postDelayed(() -> wheel3.stopWheel(), 1000);
 
-                        if (wheel1.currentIndex == wheel2.currentIndex && wheel2.currentIndex == wheel3.currentIndex) {
-                            winStatus.setText("You win big");
-                            wins++;
-                        } else if (wheel1.currentIndex == wheel2.currentIndex ||
-                                wheel2.currentIndex == wheel3.currentIndex ||
-                                wheel1.currentIndex == wheel3.currentIndex) {
-                            winStatus.setText("You win small");
-                            wins++;
-                        } else {
-                            winStatus.setText("You lose");
-                            losses++;
+                    // Start polling until the wheels actually stop
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (wheel1.isStopped && wheel2.isStopped && wheel3.isStopped) {
+                                // All wheels fully stopped — now safe to read final images
+                                if (wheel1.finalImageIndex == wheel2.finalImageIndex &&
+                                        wheel2.finalImageIndex == wheel3.finalImageIndex) {
+                                    winStatus.setText("You win big");
+                                    wins++;
+                                } else if (wheel1.finalImageIndex == wheel2.finalImageIndex ||
+                                        wheel2.finalImageIndex == wheel3.finalImageIndex ||
+                                        wheel1.finalImageIndex == wheel3.finalImageIndex) {
+                                    winStatus.setText("You win small");
+                                    wins++;
+                                } else {
+                                    winStatus.setText("You lose");
+                                    losses++;
+                                }
+
+                                spinner.setText("Start");
+                                isStarted = false;
+                            } else {
+                                // Keep checking every 50ms until wheels are done
+                                new Handler().postDelayed(this, 50);
+                            }
                         }
-
-                        spinner.setText("Start");
-                        isStarted = false;
-                    }, 2000);
-                }
+                    }, 50);
+                }, 2000);
             }
         });
     }

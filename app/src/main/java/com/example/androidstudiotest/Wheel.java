@@ -1,5 +1,7 @@
 package com.example.androidstudiotest;
 
+import java.util.Random;
+
 public class Wheel extends Thread{
     interface WheelListener {
         void NewImage(int img);
@@ -11,6 +13,10 @@ public class Wheel extends Thread{
     private long frameDuration;
     private long start;
     private boolean isStarted;
+    private Random random = new Random();
+    private int previousIndex = -1;
+    public int finalImageIndex;
+    public boolean isStopped;
 
     public Wheel(WheelListener wheelListener, long frameDuration, long start){
         this.wheelListener = wheelListener;
@@ -20,11 +26,13 @@ public class Wheel extends Thread{
         isStarted = true;
     }
     public void nextImg(){
-        currentIndex++;
+        int newIndex;
+        do {
+            newIndex = random.nextInt(imgs.length);
+        } while (newIndex == previousIndex);
 
-        if(currentIndex == imgs.length){
-            currentIndex = 0;
-        }
+        previousIndex = newIndex;
+        currentIndex = newIndex;
     }
     public void run(){
         try{
@@ -42,8 +50,10 @@ public class Wheel extends Thread{
             nextImg();
             if(wheelListener != null){
                 wheelListener.NewImage(imgs[currentIndex]);
+                finalImageIndex = currentIndex;
             }
         }
+        isStopped = true;
     }
     public void stopWheel(){
         isStarted = false;
