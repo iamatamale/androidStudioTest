@@ -17,14 +17,17 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 
 public class page2 extends AppCompatActivity {
-    private TextView winStatus;
+    private TextView winStatus, chipsNum, betAmountView;
     private ImageView img1, img2, img3;
     private Wheel wheel1, wheel2, wheel3;
-    private Button spinner;
+    private Button spinner, increaseBet, decreaseBet;
     private boolean isStarted;
     private int wins = 0;
     private int losses = 0;
     public static final Random RANDOM = new Random();
+    private int numChips = 1000;
+    private int betAmount = 10;
+    private int winnings;
     public static long randomLong(long lower, long upper){
         return lower + (long) (RANDOM.nextDouble() * (upper-lower));
     }
@@ -46,9 +49,37 @@ public class page2 extends AppCompatActivity {
         img3 = findViewById(R.id.img3);
         spinner = findViewById(R.id.spinButton);
         winStatus = findViewById(R.id.winStatus);
+        chipsNum = findViewById(R.id.chipsAmount);
+        betAmountView = findViewById(R.id.betAmount);
+        increaseBet = findViewById(R.id.increaseBet);
+        decreaseBet = findViewById(R.id.decreaseBet);
+        chipsNum.setText("Number of chips: "+ numChips);
 
+        increaseBet.setOnClickListener(v -> {
+            if (betAmount < numChips) {
+                betAmount += 10;
+                betAmountView.setText("Current Bet: " + betAmount);
+            }
+        });
+
+        decreaseBet.setOnClickListener(v -> {
+            if (betAmount > 10) {
+                betAmount -= 10;
+                betAmountView.setText("Current Bet: " + betAmount);
+            }
+        });
         spinner.setOnClickListener(v -> {
             if (!isStarted) {
+                if (numChips < betAmount) {
+                    winStatus.setText("Not enough chips to bet!");
+                    return;
+                }
+
+                winnings = 0;
+
+                numChips -= betAmount;
+                chipsNum.setText("Number of chips: " + numChips);
+
                 // Start the wheels
                 wheel1 = new Wheel(img -> runOnUiThread(() -> img1.setImageResource(img)), 200, randomLong(0, 200));
                 wheel1.start();
@@ -75,20 +106,21 @@ public class page2 extends AppCompatActivity {
                         public void run() {
                             if (wheel1.isStopped && wheel2.isStopped && wheel3.isStopped) {
                                 // All wheels fully stopped — now safe to read final images
-                                if (wheel1.finalImageIndex == wheel2.finalImageIndex &&
-                                        wheel2.finalImageIndex == wheel3.finalImageIndex) {
+                                if (wheel1.finalImageIndex == wheel2.finalImageIndex && wheel2.finalImageIndex == wheel3.finalImageIndex) {
                                     winStatus.setText("You win big");
+                                    winnings = betAmount * 5;
                                     wins++;
-                                } else if (wheel1.finalImageIndex == wheel2.finalImageIndex ||
-                                        wheel2.finalImageIndex == wheel3.finalImageIndex ||
-                                        wheel1.finalImageIndex == wheel3.finalImageIndex) {
+                                } else if (wheel1.finalImageIndex == wheel2.finalImageIndex || wheel2.finalImageIndex == wheel3.finalImageIndex || wheel1.finalImageIndex == wheel3.finalImageIndex) {
                                     winStatus.setText("You win small");
+                                    winnings = betAmount * 2;
                                     wins++;
                                 } else {
                                     winStatus.setText("You lose");
                                     losses++;
                                 }
 
+                                numChips+=winnings;
+                                chipsNum.setText("Number of chips: " + numChips);
                                 spinner.setText("Start");
                                 isStarted = false;
                             } else {
