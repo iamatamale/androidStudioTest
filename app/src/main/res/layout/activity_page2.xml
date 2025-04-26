@@ -116,6 +116,16 @@
             android:layout_height="30sp"
             android:textSize="12sp"
             android:text="- Bet"
+            android:background="@drawable/squarebutton"
+            android:layout_marginRight="10sp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/maxBet"
+            android:layout_width="50sp"
+            android:layout_height="30sp"
+            android:textSize="12sp"
+            android:text="MAX"
             android:background="@drawable/squarebutton">
         </androidx.appcompat.widget.AppCompatButton>
     </LinearLayout>
