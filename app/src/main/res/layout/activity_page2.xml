@@ -18,6 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/winRules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Match 2 Images = 2x | Match 3 Images = 5x"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_above="@id/frame"
+        android:layout_marginBottom="-105dp"
+        android:layout_centerHorizontal="true" />
+
     <FrameLayout
         android:layout_centerInParent="true"
         android:id="@+id/frame"
@@ -57,18 +68,20 @@
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/slot1" />
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/winStatus"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="top|center_horizontal"
+            android:text=""
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="6dp">
+        </TextView>
     </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/winStatus"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/frame"
-        android:text=""
-        android:textSize="25sp"
-        android:layout_marginBottom="-90dp">
-    </TextView>
 
     <TextView
         android:layout_width="wrap_content"
