@@ -1,7 +1,7 @@
 package com.example.androidstudiotest;
 
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,12 +10,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Stats extends AppCompatActivity {
-    private Button returnToStart;
+
+    private TextView slotsWins, slotsLosses;
+    public static int chips = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_page3);
+        setContentView(R.layout.activity_stats);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -23,5 +26,11 @@ public class Stats extends AppCompatActivity {
         });
 
         PageMovement.pageMoving(this, R.id.moveToStart, MainActivity.class);
+
+        slotsWins = findViewById(R.id.slotsWins);
+        slotsLosses = findViewById(R.id.slotsLosses);
+
+        slotsWins.setText("Wins: " + Slots.getWins());
+        slotsLosses.setText("Losses: " + Slots.getLosses());
     }
 }

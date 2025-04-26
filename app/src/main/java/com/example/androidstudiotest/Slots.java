@@ -20,10 +20,10 @@ public class Slots extends AppCompatActivity {
     private Wheel wheel1, wheel2, wheel3;
     private Button spinner, increaseBet, decreaseBet, maxBet;
     private boolean isStarted;
-    private int wins = 0;
-    private int losses = 0;
+    private static int wins = 0;
+    private static int losses = 0;
     public static final Random RANDOM = new Random();
-    private int numChips = 1000;
+    private int numChips = Stats.chips;
     private int betAmount = 10;
     private int winnings, currBet;
     public static long randomLong(long lower, long upper){
@@ -33,7 +33,7 @@ public class Slots extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_page2);
+        setContentView(R.layout.activity_slots);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -137,11 +137,11 @@ public class Slots extends AppCompatActivity {
         });
     }
     //@return returns number of wins
-    public int getWins(){
+    public static int getWins(){
         return wins;
     }
     //@return returns number of losses
-    public int getLosses(){
+    public static int getLosses(){
         return losses;
     }
 }
