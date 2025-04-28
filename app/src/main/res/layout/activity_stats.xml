@@ -22,6 +22,13 @@
         android:text="Slots"
         android:textSize="30sp" />
     <TextView
+        android:id="@+id/roundsPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textSize="30sp" />
+    <TextView
         android:id="@+id/slotsWins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +37,27 @@
         android:textSize="30sp" />
     <TextView
         android:id="@+id/slotsLosses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textSize="30sp" />
+    <TextView
+        android:id="@+id/jackpots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textSize="30sp" />
+    <TextView
+        android:id="@+id/chipsWon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textSize="30sp" />
+    <TextView
+        android:id="@+id/chipsLost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

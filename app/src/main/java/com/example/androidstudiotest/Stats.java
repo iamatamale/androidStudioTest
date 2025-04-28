@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Stats extends AppCompatActivity {
 
-    private TextView slotsWins, slotsLosses;
+    private TextView slotsWins, slotsLosses, totalRounds, jackpots, chipsWon, chipsLost;
     public static int chips = 3000;
 
     @Override
@@ -29,8 +29,17 @@ public class Stats extends AppCompatActivity {
 
         slotsWins = findViewById(R.id.slotsWins);
         slotsLosses = findViewById(R.id.slotsLosses);
+        totalRounds = findViewById(R.id.roundsPlayed);
+        jackpots = findViewById(R.id.jackpots);
+        chipsWon = findViewById(R.id.chipsWon);
+        chipsLost = findViewById(R.id.chipsLost);
+
 
         slotsWins.setText("Wins: " + Slots.getWins());
         slotsLosses.setText("Losses: " + Slots.getLosses());
+        totalRounds.setText("Rounds played: " + Slots.getTotalRounds());
+        jackpots.setText("Jackpots hit: " + Slots.getJackpots());
+        chipsWon.setText("Chips won: " + Slots.getWonChips());
+        chipsLost.setText("Chips lost: " + Slots.getLostChips());
     }
 }

@@ -22,6 +22,10 @@ public class Slots extends AppCompatActivity {
     private boolean isStarted;
     private static int wins = 0;
     private static int losses = 0;
+    private static int jackpots = 0;
+    private static int totalRounds = 0;
+    private static int wonChips = 0;
+    private static int lostChips = 0;
     public static final Random RANDOM = new Random();
     private int numChips = Stats.chips;
     private int betAmount = 10;
@@ -82,6 +86,7 @@ public class Slots extends AppCompatActivity {
                 winnings = 0;
                 currBet = betAmount;        //save current bet amount
                 numChips -= betAmount;      //update and display new chip amount
+                Stats.chips = numChips;
                 chipsNumText.setText("Number of chips: " + numChips);
 
                 // start the wheels
@@ -113,16 +118,21 @@ public class Slots extends AppCompatActivity {
                                     winStatus.setText("You win big");      //all 3 img match
                                     winnings = currBet * 5;
                                     wins++;
+                                    jackpots++;
+                                    wonChips +=winnings;
                                 } else if (wheel1.finalImageIndex == wheel2.finalImageIndex || wheel2.finalImageIndex == wheel3.finalImageIndex || wheel1.finalImageIndex == wheel3.finalImageIndex) {
                                     winStatus.setText("You win small");    // 2 img match
                                     winnings = currBet * 2;
                                     wins++;
+                                    wonChips +=winnings;
                                 } else {
                                     winStatus.setText("You lose");      // no img match
                                     losses++;
+                                    lostChips+=currBet;
                                 }
 
                                 numChips+=winnings;         //update num chips with winnings and display
+                                Stats.chips = numChips;
                                 chipsNumText.setText("Number of chips: " + numChips);
                                 spinner.setText("Start");
                                 isStarted = false;
@@ -136,12 +146,34 @@ public class Slots extends AppCompatActivity {
             }
         });
     }
+
     //@return returns number of wins
     public static int getWins(){
         return wins;
     }
+
     //@return returns number of losses
     public static int getLosses(){
         return losses;
+    }
+
+    //@return number of jackpots
+    public static int getJackpots(){
+        return jackpots;
+    }
+
+    //@return total rounds played
+    public static int getTotalRounds(){
+        return totalRounds;
+    }
+
+    //@return chips won
+    public static int getWonChips() {
+        return wonChips;
+    }
+
+    //@return chips lost
+    public static int getLostChips() {
+        return lostChips;
     }
 }
