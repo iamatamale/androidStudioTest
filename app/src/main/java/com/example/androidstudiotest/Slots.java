@@ -27,7 +27,6 @@ public class Slots extends AppCompatActivity {
     private static int wonChips = 0;
     private static int lostChips = 0;
     public static final Random RANDOM = new Random();
-    private int numChips = Stats.chips;
     private int betAmount = 10;
     private int winnings, currBet;
     public static long randomLong(long lower, long upper){
@@ -57,10 +56,10 @@ public class Slots extends AppCompatActivity {
         decreaseBet = findViewById(R.id.decreaseBet);
         maxBet = findViewById(R.id.maxBet);
 
-        chipsNumText.setText("Number of chips: "+ numChips);
+        chipsNumText.setText("Number of chips: "+ Stats.chips);
 
         increaseBet.setOnClickListener(v -> {       //increases the bet by 10
-            if (betAmount < numChips) {
+            if (betAmount < Stats.chips) {
                 betAmount += 10;
                 betAmountView.setText("Current Bet: " + betAmount);
             }
@@ -73,21 +72,20 @@ public class Slots extends AppCompatActivity {
             }
         });
         maxBet.setOnClickListener(v -> {            //sets bet equal to num chips
-            betAmount = numChips;
+            betAmount = Stats.chips;
             betAmountView.setText("Current Bet: " + betAmount);
         });
         spinner.setOnClickListener(v -> {       //spin button on click
             if (!isStarted) {
-                if (numChips < betAmount) {
+                if (Stats.chips < betAmount) {
                     winStatus.setText("Not enough chips to bet!");  //check for sufficient chips
                     return;
                 }
 
                 winnings = 0;
                 currBet = betAmount;        //save current bet amount
-                numChips -= betAmount;      //update and display new chip amount
-                Stats.chips = numChips;
-                chipsNumText.setText("Number of chips: " + numChips);
+                Stats.chips -= betAmount;      //update and display new chip amount
+                chipsNumText.setText("Number of chips: " + Stats.chips);
 
                 // start the wheels
                 wheel1 = new Wheel(img -> runOnUiThread(() -> img1.setImageResource(img)), 200, randomLong(0, 200));
@@ -120,20 +118,22 @@ public class Slots extends AppCompatActivity {
                                     wins++;
                                     jackpots++;
                                     wonChips +=winnings;
+                                    totalRounds++;
                                 } else if (wheel1.finalImageIndex == wheel2.finalImageIndex || wheel2.finalImageIndex == wheel3.finalImageIndex || wheel1.finalImageIndex == wheel3.finalImageIndex) {
                                     winStatus.setText("You win small");    // 2 img match
                                     winnings = currBet * 2;
                                     wins++;
                                     wonChips +=winnings;
+                                    totalRounds++;
                                 } else {
                                     winStatus.setText("You lose");      // no img match
                                     losses++;
                                     lostChips+=currBet;
+                                    totalRounds++;
                                 }
 
-                                numChips+=winnings;         //update num chips with winnings and display
-                                Stats.chips = numChips;
-                                chipsNumText.setText("Number of chips: " + numChips);
+                                Stats.chips+=winnings;         //update num chips with winnings and display
+                                chipsNumText.setText("Number of chips: " + Stats.chips);
                                 spinner.setText("Start");
                                 isStarted = false;
                             } else {
